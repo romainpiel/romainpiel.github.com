@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Anything About Android]]></title>
+  <link href="http://RomainPiel.github.io/atom.xml" rel="self"/>
+  <link href="http://RomainPiel.github.io/"/>
+  <updated>2013-07-22T18:14:09+02:00</updated>
+  <id>http://RomainPiel.github.io/</id>
+  <author>
+    <name><![CDATA[Romain Piel]]></name>
+    <email><![CDATA[contact@romainpiel.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[TextChronometer - live 'time ago' TextView]]></title>
+    <link href="http://RomainPiel.github.io/blog/2013/07/22/textchronometer/"/>
+    <updated>2013-07-22T17:45:00+02:00</updated>
+    <id>http://RomainPiel.github.io/blog/2013/07/22/textchronometer</id>
+    <content type="html"><![CDATA[<p>The other day I was using Twitter for Android and I noticed something that we can call a bug. Timestamps in the timeline don&rsquo;t get updated until the list view gets scrolled. If you are an Android developer, you know that this behaviour is expected. Views will only get updated when the adapter calls getView() and the view is getting populated.</p>
+
+<p><img src="http://d.pr/i/7beE+" alt="Twitter example" /></p>
+
+<p>But obviously this is wrong. If I browse my timeline, then let my screen on and get back to it after one hour, I don&rsquo;t want to see the same time.</p>
+
+<p>The reason why developers don&rsquo;t bother is mainly because the SDK doesn&rsquo;t offer any solution with this exact purpose.
+&ndash; DigitalClock (or its new version, TextClock) are designed to display a simple clock. TextClock can have different formats of date but the &ldquo;ago&rdquo; form is not one of them.
+&ndash; Chronometer could be enough but we&rsquo;d still have to tweak it to have a nice result.</p>
+
+<p><a href="https://github.com/RomainPiel/TextChronometer">Here is my solution</a>. I bet it&rsquo;s not perfect but it does the job. The custom view is called <a href="https://github.com/RomainPiel/TextChronometer/blob/master/TextChronometer/src/main/java/com/romainpiel/textchronometer/TextChronometer.java">TextChronometer</a> (I may want to change that name in the future). Just include it in your layout:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;com.romainpiel.textchronometer.TextChronometer</span>
+</span><span class='line'>     <span class="na">android:id=</span><span class="s">&quot;@+id/timestamp&quot;</span>
+</span><span class='line'>     <span class="na">android:layout_width=</span><span class="s">&quot;wrap_content&quot;</span>
+</span><span class='line'>     <span class="na">android:layout_height=</span><span class="s">&quot;match_parent&quot;</span><span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then to set it up:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">textChronometer</span><span class="o">.</span><span class="na">setTime</span><span class="o">(</span><span class="n">timeInMillis</span><span class="o">);</span>    
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I&rsquo;m providing a <a href="https://github.com/RomainPiel/TextChronometer/tree/master/TextChronometer-sample">sample</a> showing how to use it in an adapter (nothing really fancy in there).</p>
+
+<p><img src="http://d.pr/i/J16b+" alt="TextChronometer sample ListActivity" /></p>
+
+<p>Current state of the project is very basic and I imagine it can be improved a lot. If you have any suggestion, feel free to contribute.</p>
+]]></content>
+  </entry>
+  
+</feed>
